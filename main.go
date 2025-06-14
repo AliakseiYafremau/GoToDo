@@ -25,7 +25,7 @@ func main() {
 	tasks[task_4.ID] = task_4
 	tasks[task_5.ID] = task_5
 
-	memory_repo = repositories.InMemoryRepository{Tasks: tasks}
+	memory_repo = repositories.NewInMemoryRepository(tasks)
 
 	fmt.Println(memory_repo.GetById(1))
 	fmt.Println(memory_repo.GetById(2))

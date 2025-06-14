@@ -6,7 +6,15 @@ import (
 )
 
 type InMemoryRepository struct {
-	Tasks map[int]models.Task
+	Tasks  map[int]models.Task
+	max_id int
+}
+
+func NewInMemoryRepository(tasks map[int]models.Task) InMemoryRepository {
+	return InMemoryRepository{
+		Tasks:  tasks,
+		max_id: 0,
+	}
 }
 
 func (db InMemoryRepository) GetById(id int) (models.Task, error) {
