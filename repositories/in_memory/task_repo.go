@@ -1,21 +1,21 @@
-package repositories
+package in_memory_repositories
 
 import (
 	"github.com/AliakseiYafremau/GoToDo/errors"
 	"github.com/AliakseiYafremau/GoToDo/models"
 )
 
-type InMemoryRepository struct {
+type InMemoryTaskRepository struct {
 	DB *InMemoryDB
 }
 
-func NewInMemoryRepository(db *InMemoryDB) *InMemoryRepository {
-	return &InMemoryRepository{
+func NewInMemoryTaskRepository(db *InMemoryDB) *InMemoryTaskRepository {
+	return &InMemoryTaskRepository{
 		DB: db,
 	}
 }
 
-func (repo *InMemoryRepository) GetById(task_id int) (models.Task, error) {
+func (repo *InMemoryTaskRepository) GetById(task_id int) (models.Task, error) {
 	task, ok := repo.DB.Tasks[task_id]
 
 	if !ok {
@@ -25,7 +25,7 @@ func (repo *InMemoryRepository) GetById(task_id int) (models.Task, error) {
 	return task, nil
 }
 
-func (repo *InMemoryRepository) Create(text string) (models.Task, error) {
+func (repo *InMemoryTaskRepository) Create(text string) (models.Task, error) {
 	repo.DB.max_task_id++
 	task := models.Task{ID: repo.DB.max_task_id, Text: text}
 
@@ -34,7 +34,7 @@ func (repo *InMemoryRepository) Create(text string) (models.Task, error) {
 	return task, nil
 }
 
-func (repo *InMemoryRepository) GetAll() ([]models.Task, error) {
+func (repo *InMemoryTaskRepository) GetAll() ([]models.Task, error) {
 	result := make([]models.Task, 0, len(repo.DB.Tasks))
 
 	for _, task := range repo.DB.Tasks {
@@ -44,7 +44,7 @@ func (repo *InMemoryRepository) GetAll() ([]models.Task, error) {
 	return result, nil
 }
 
-func (repo *InMemoryRepository) Update(task_id int, text string) (models.Task, error) {
+func (repo *InMemoryTaskRepository) Update(task_id int, text string) (models.Task, error) {
 	_, ok := repo.DB.Tasks[task_id]
 
 	if !ok {
@@ -56,7 +56,7 @@ func (repo *InMemoryRepository) Update(task_id int, text string) (models.Task, e
 	return repo.DB.Tasks[task_id], nil
 }
 
-func (repo *InMemoryRepository) Delete(task_id int) error {
+func (repo *InMemoryTaskRepository) Delete(task_id int) error {
 	_, ok := repo.DB.Tasks[task_id]
 
 	if !ok {

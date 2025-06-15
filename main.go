@@ -6,13 +6,15 @@ import (
 
 	"github.com/AliakseiYafremau/GoToDo/interfaces"
 	"github.com/AliakseiYafremau/GoToDo/repositories/in_memory"
+	"github.com/AliakseiYafremau/GoToDo/repositories/sqlite"
 )
 
 func main() {
 	var task_memory_repo interfaces.TaskRepository
 
-	in_memory_db := repositories.NewInMemoryDB()
-	task_memory_repo = repositories.NewInMemoryRepository(in_memory_db)
+	in_memory_db := in_memory_repositories.NewInMemoryDB()
+	sqlite_repositories.NewSqliteDB()
+	task_memory_repo = in_memory_repositories.NewInMemoryTaskRepository(in_memory_db)
 
 	task_memory_repo.Create("Task number 1")
 	task_memory_repo.Create("Task number 2")

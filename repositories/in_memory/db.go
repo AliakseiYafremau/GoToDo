@@ -1,4 +1,4 @@
-package repositories
+package in_memory_repositories
 
 import "github.com/AliakseiYafremau/GoToDo/models"
 
