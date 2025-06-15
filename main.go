@@ -22,9 +22,11 @@ func main() {
 
 	fmt.Println(task_memory_repo.GetAll())
 
-	fmt.Println(task_memory_repo.GetById(1))
-	fmt.Println(task_memory_repo.GetById(2))
-	fmt.Println(task_memory_repo.GetById(3))
-	fmt.Println(task_memory_repo.GetById(4))
-	fmt.Println(task_memory_repo.GetById(5))
+	task_memory_repo.Delete(1)
+
+	fmt.Println(task_memory_repo.GetAll())
+
+	task_memory_repo.Update(2, "Task number 2. CHANGED")
+
+	fmt.Println(task_memory_repo.GetAll())
 }
