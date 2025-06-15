@@ -2,21 +2,28 @@ package sqlite_repositories
 
 import (
 	"database/sql"
-	"log"
+
+	_ "github.com/mattn/go-sqlite3"
+
+	"github.com/AliakseiYafremau/GoToDo/errors"
 )
 
-func NewSqliteDB() *sql.DB {
-	database := ConnectSQLiteDB("sqlite.db")
+func NewSqliteDB() (*sql.DB, error) {
+	database, err := ConnectSQLiteDB("sqlite.db")
 
-	return database
+	if err != nil {
+		return nil, err
+	}
+
+	return database, nil
 }
 
-func ConnectSQLiteDB(path string) *sql.DB {
+func ConnectSQLiteDB(path string) (*sql.DB, error) {
 	database, err := sql.Open("sqlite3", path)
 
 	if err != nil {
-		log.Fatal(err)
+		return nil, errors.ErrConnectionFailed
 	}
 
-	return database
+	return database, nil
 }
