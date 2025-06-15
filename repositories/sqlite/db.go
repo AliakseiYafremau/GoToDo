@@ -15,6 +15,12 @@ func NewSqliteDB() (*sql.DB, error) {
 		return nil, err
 	}
 
+	err = CreateTables(database)
+
+	if err != nil {
+		return nil, err
+	}
+
 	return database, nil
 }
 
@@ -26,4 +32,21 @@ func ConnectSQLiteDB(path string) (*sql.DB, error) {
 	}
 
 	return database, nil
+}
+
+func CreateTables(database *sql.DB) error {
+	sql_statement := `
+		CREATE TABLE IF NOT EXISTS tasks (
+			id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+			text TEXT
+	);
+	`
+
+	_, err := database.Exec(sql_statement)
+
+	if err != nil {
+		return errors.ErrTablesCreationFailed
+	}
+
+	return nil
 }
