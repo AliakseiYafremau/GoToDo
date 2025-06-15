@@ -15,7 +15,7 @@ func main() {
 	var task_sqlite_repo interfaces.TaskRepository
 
 	in_memory_db := in_memory_repositories.NewInMemoryDB()
-	sqlite_db, _ := sqlite_repositories.NewSqliteDB()
+	sqlite_db, _ := sqlite_repositories.NewSqliteDB("sqlite.db")
 
 	task_memory_repo = in_memory_repositories.NewInMemoryTaskRepository(in_memory_db)
 	task_sqlite_repo = sqlite_repositories.NewSqliteTaskRepository(sqlite_db)

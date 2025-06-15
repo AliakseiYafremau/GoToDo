@@ -8,8 +8,8 @@ import (
 	"github.com/AliakseiYafremau/GoToDo/errors"
 )
 
-func NewSqliteDB() (*sql.DB, error) {
-	database, err := ConnectSQLiteDB("sqlite.db")
+func NewSqliteDB(database_path string) (*sql.DB, error) {
+	database, err := ConnectSQLiteDB(database_path)
 
 	if err != nil {
 		return nil, err
