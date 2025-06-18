@@ -7,13 +7,13 @@ import (
 )
 
 func setup_repo() (*sqlite_repositories.SqliteTaskRepository, error) {
-	db, err := sqlite_repositories.NewSqliteDB(":memory:")
+	database, err := sqlite_repositories.NewSqliteDB(":memory:")
 
 	if err != nil {
 		return nil, err
 	}
 
-	return sqlite_repositories.NewSqliteTaskRepository(db), nil
+	return sqlite_repositories.NewSqliteTaskRepository(database), nil
 }
 
 func TestCreateTask(t *testing.T) {
